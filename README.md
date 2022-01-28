@@ -12,7 +12,7 @@ A demo of this page is viewable here:
 http://website-pocs.s3-website-us-east-1.amazonaws.com/
 
 
-# Product Filtering
+## Product Filtering
 
 All Shopify vendor products are imported but only some are displayed on the wholesale page. 
 For an item to appear in the wholesale page, it must have the following tags
