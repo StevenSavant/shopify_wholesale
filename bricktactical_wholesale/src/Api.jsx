@@ -4,7 +4,7 @@ import localData from './products.json'
 
 const axios = require('axios').default;
 const environment = buildConfigs.environment
-const product_file_url = buildConfigs.hostS3BucketUrl + '/' + buildConfigs.productFile
+const product_file_url = buildConfigs.hostS3BucketUrl + '/' + buildConfigs.productsFile
 const config_url = buildConfigs.hostS3BucketUrl + '/' + buildConfigs.S3ConfigFile
 
 export function get_products(responseHandler) {
