@@ -21,14 +21,18 @@ For an item to appear in the wholesale page, it must have the following tags
 - A wholesale price with format `WSP 0.00` 
 - A minimum quantity with format `MQTY 00`
 
-As products are read in that meet these criteria, the various types are also noted to allow filtering in the main page. 
+Note: these tags are case-sensitive
 
-## Wholesale page
 
-The React front end defines the page structure and pulls the item data form the local file `src/products.json` items are filtered in the UI to include only those under the `BrickTactical` vender and with the `Wholesale` tag attached to them. 
+## Wholesale Page
 
-## GetShopifyProductsLambda
+The React front end defines the page structure and pulls the item data form the local file `src/products.json` or S3 Bucket.
+Items are not loaded into the UI until the page is unlocked.
+
+## Product Importer
 
 A python script is used to pull the product data at the vendor level from a 
 shopify store. There is no way to do this dynamically from a static-webpage in S3 and deploying a server (or using other serverless features) would not be cost-effective for this use-case.
+
+See the `GetShopifyProductsLambda` for details
 

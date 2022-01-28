@@ -24,7 +24,9 @@ chrome-user-data
 *.swp
 *.swo
 
+# Project Specific
 products.json
+config.json
 
 # Logs
 logs
