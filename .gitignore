@@ -27,6 +27,7 @@ chrome-user-data
 # Project Specific
 *products.json
 *config.json
+*output.txt
 
 # Logs
 logs
