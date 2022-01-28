@@ -1,0 +1,170 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.main {
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+.tileItem {
+    border-style:double
+}
+
+
+.imageCell {
+    padding-top: 5%;
+    text-align: center;
+}
+
+.nameCell {
+    padding-top: 20%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.quantityCell {
+    padding-top: 15%;
+    text-align: center;
+}
+
+.priceCellWSP {
+    padding-top: 20%;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+.priceCellMSRP {
+    padding-top: 20%;
+    text-align: center;
+}
+
+
+#submitButton {
+    text-align: right;
+    position: relative;
+}
+
+.banner {
+    background-color: aqua;
+    text-align: right;
+}
+
+.tableHeader {
+    padding-top: 12px;
+}
+
+th, td {
+    text-align: left;
+}
+
+#InvoiceDataContainer {
+    display: none;
+}
+
+
+#invoiceTotal {
+    border-bottom:white;
+}
+
+@media print {
+
+    #InvoiceDataContainer {
+        display: block;
+    }
+
+    #InvoiceAddressRow {
+        background-color: gold;
+        width: 100%;
+    }
+
+    #invoiceLogo {
+        display: flex;
+        height: 100px;
+    }
+
+    #invoiceImage {
+        height: 100%;
+    }
+
+    #InvoiceFigureArea {
+        background-color: green;
+        height: 100px;
+        padding-top: 2%;
+        margin: 0%;
+    }
+
+    #AddressArea {
+        background-color: purple;
+        width: 100%;
+    }
+
+    #invoiceCaption {
+        display: none;
+    }
+
+    #InvoiceTableHeader {
+        color: white;
+        background-color: #383838;
+    }
+
+    #printSection, #printSection * {
+      visibility:visible;
+    }
+    #printSection {
+      position:absolute;
+      left:0;
+      top:0;
+    }
+    #invoiceTotal {
+        font-weight: bold;
+        text-align: right;
+        padding-right: 10%;
+    }
+    #sku_header {
+        text-align: left;
+    }
+}
