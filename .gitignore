@@ -23,7 +23,7 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-.env/
+.env
 .venv/
 
 # Project Specific
