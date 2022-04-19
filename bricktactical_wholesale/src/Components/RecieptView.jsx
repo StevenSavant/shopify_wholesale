@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ReactToPrint from "react-to-print"
 import { Component } from 'react';
 import { InvoiceLogoFigure } from './LogoFigure'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Form, FormControl } from 'react-bootstrap';
 
 function getDate(format) {
     var today = new Date();
@@ -26,7 +26,7 @@ const LineItem = (props) => {
                 {props.item.name}
             </td>
             <td className="lineItemData">
-                {props.pid}
+                {props.item.sku}
             </td>
             <td className="lineItemData">
                 ${props.item.unitPrice.toFixed(2)}
@@ -76,9 +76,18 @@ const InvoiceAddress = () => {
 }
 
 class RecieptView extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            fullName: '',
+            companyEmail: ''
+        }
+    }
 
     handleClick = () => this.props.handleClose()
     handleSubmit = () => this.props.handlePrint()
+    handleName = (event) => this.setState({fullName : event.target.value})
+    handleEmail = (event) => this.setState({companyEmail : event.target.value})
     
     render() {
         return (
@@ -96,6 +105,18 @@ class RecieptView extends Component {
                     Review Invoice
                 </Modal.Title>
             </Modal.Header>
+            <Form className="RequestorForm">
+                <Row id='CustomerInfo'>
+                    <Col>
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control type="text" placeholder="ex: John Norman" onChange={this.handleName} />
+                    </Col>
+                    <Col>
+                        <Form.Label>Company Email</Form.Label>
+                        <Form.Control type="text" placeholder="ex: business@discoeco.com" onChange={this.handleEmail} />
+                    </Col>
+                </Row>
+            </Form>
             <div ref={el => (this.componentRef = el)} media="print">
                 <Container fluid="md" style={{padding:'40px', paddingBottom: '0%'}} id='InvoiceDataContainer'>
                     <Row>
@@ -105,6 +126,12 @@ class RecieptView extends Component {
                         <Col style={{textAlign : 'right'}}>
                             <InvoiceAddress/>
                         </Col>
+                    </Row>
+                    <Row>
+                        <p>
+                            Name: {this.state.fullName} <br/>
+                            Email: {this.state.companyEmail}
+                        </p>
                     </Row>
                 </Container>
                 <Modal.Body id='Invoice'>

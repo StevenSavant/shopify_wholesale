@@ -25,6 +25,7 @@ chrome-user-data
 *.swo
 .env
 .venv/
+lambda-dist/
 
 # Project Specific
 *products.json

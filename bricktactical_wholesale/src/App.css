@@ -37,8 +37,6 @@
   }
 }
 
-
-
 .main {
     margin: 0 auto;
     text-align: center;
@@ -68,6 +66,15 @@
 .quantityCell {
     padding-top: 15%;
     text-align: center;
+}
+
+.quantityCell.invalidMiminum {
+    color: red;
+    font-weight: bold;
+}
+
+.RequestorForm {
+    padding: 2%;
 }
 
 .priceCellWSP {
@@ -149,6 +156,11 @@ th, td {
     #InvoiceTableHeader {
         color: white;
         background-color: #383838;
+    }
+
+    #CustomerInfo {
+        background-color: purple;
+        width: 100%;
     }
 
     #printSection, #printSection * {

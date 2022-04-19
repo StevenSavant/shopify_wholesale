@@ -3,6 +3,7 @@ import os
 import requests
 import json
 import boto3
+from datetime import datetime
 
 SHOPIFY_API_KEY = os.getenv('SHOPIFY_API_KEY', None)
 SHOPIFY_SECRET_KEY = os.getenv('SHOPIFY_SECRET_KEY', None)
@@ -10,8 +11,27 @@ SHOPIFY_STORE_NAME = os.getenv('SHOPIFY_STORE_NAME', None)
 SHOPIFY_VENDOR_FILTER = os.getenv('SHOPIFY_VENDOR_FILTER', None)
 OUTPUT_LOCATION = os.getenv('OUTPUT_LOCATION', 'local')
 S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME', 'website-pocs')
-DEBUG = os.getenv('DEBUG', None)
+DEBUG = os.getenv('DEBUG', True)
 
+def invalidate_object(filepath):
+    # creatues uniuque up to 1 hour,  this prevents repeated calls
+    timestamp = datetime.today().strftime('%Y-%m-%d-%H')
+    invalidationID = f'CFINVALIDATION-{timestamp}'
+
+    print(invalidationID)
+    client = boto3.client('cloudfront')
+
+    response = client.create_invalidation(
+        DistributionId='ELEK0XZYF4MB8',
+        InvalidationBatch={
+            'Paths': {
+                'Quantity': 1,
+                'Items': [
+                    filepath,
+                ]
+            },
+            'CallerReference': invalidationID
+        })
 
 def get_store_data(shopify_store, api_key, secret_key, debug=False):
     backend_url = f'https://{shopify_store}.myshopify.com/admin/products.json?vendor={SHOPIFY_VENDOR_FILTER}'
@@ -56,14 +76,13 @@ def get_store_data(shopify_store, api_key, secret_key, debug=False):
 def update_s3_data(pdata):
     client = boto3.client('s3')
     endcoded_pdata = json.dumps(pdata).encode('utf-8')
-    response = client.put_object(Body=endcoded_pdata, Key='products.json', Bucket={S3_BUCKET_NAME})
+    response = client.put_object(Body=endcoded_pdata, Key='products.json', Bucket=S3_BUCKET_NAME)
     return response
 
 
 def main(debug=False):
     """Script Entry point
     """
-
     data = get_store_data(SHOPIFY_STORE_NAME, SHOPIFY_API_KEY, SHOPIFY_SECRET_KEY, debug=debug)
     results = {'products' : data}
 
@@ -75,6 +94,8 @@ def main(debug=False):
     else:
         print('writing data to s3 object "products.json"')
         update_s3_data(results)
+    
+    invalidate_object('/products.json')
 
 
 

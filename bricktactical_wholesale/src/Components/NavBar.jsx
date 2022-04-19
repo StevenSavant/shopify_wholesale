@@ -38,11 +38,11 @@ class NavBarWithSearch extends Component {
                 </Nav>
                 <div className="d-flex">
                     <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                    onChange={this.handleSearch}
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                        onChange={this.handleSearch}
                     />
                     <Button type="submit" variant="outline-success" onClick={this.handleClick}>Checkout</Button>
                 </div>

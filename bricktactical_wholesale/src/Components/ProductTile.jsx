@@ -9,11 +9,26 @@ function get_sku_or_id(item) {
 
 class ProductTile extends Component {
 
-    handleChange = (event) => {
-        if (event.target.value < this.props.productEntry.MQTY)
-            event.target.value = ""
+    constructor(props) {
+        super(props);
+        this.state = { valid : true }
+    }
 
-        this.props.handleChange(this.props.productEntry, event.target.value)
+    handleChange = (event) => {
+
+        if (Number(event.target.value) === 0) {
+            this.setState({valid : true})
+        }
+        else if (Number(event.target.value) < Number(this.props.productEntry.MQTY)) {
+            console.log(`target value: ${event.target.value} is less than minimum ${this.props.productEntry.MQTY}`)
+            this.setState({valid : false})
+        }
+        else {
+            this.setState({valid : true})
+        }
+
+        event.preventDefault()
+        this.props.handleChange(this.props.productEntry, Number(event.target.value))
     }
 
     render() { 
@@ -52,8 +67,8 @@ class ProductTile extends Component {
                             min={this.props.productEntry.MQTY}
                             max="500"
                             onChange={this.handleChange}
-                            />
-                        <p>min. {this.props.productEntry.MQTY}</p>
+                        />
+                        <p style={{color : (this.state.valid) ? 'black' : 'red', fontWeight: (this.state.valid) ? '' : 'bold'}}>min. {this.props.productEntry.MQTY}</p>
                 </div>
               </div>
             </div>

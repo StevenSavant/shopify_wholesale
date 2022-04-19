@@ -43,8 +43,9 @@ class MainPage extends Component {
 
     updateCart = (item, quantity) => {
 
-        if (quantity === 0 || quantity === '' || quantity < item.WSP) {
+        if (quantity === 0 || quantity < item.MQTY) {
             delete this.cart[`${item.id}`]
+            console.log('removing from cart')
             return null
         }
         
@@ -54,7 +55,8 @@ class MainPage extends Component {
                 'name' : item.name,
                 'quantity' : quantity,
                 'unitPrice' : wsp_value,
-                'itemTotal' : (quantity * wsp_value)
+                'itemTotal' : (quantity * wsp_value),
+                'sku' : (item.sku === '') ? item.id : item.sku
             }
         }
         else {
@@ -109,7 +111,7 @@ class MainPage extends Component {
                 handlePrint={this.printReciept}
              />
             <MainPageLogoFigure imageid='MainPageLogo'/>
-            <NavBarWithSearch 
+            <NavBarWithSearch
                 handleCheckout={this.showReciept}
                 handleSearch={this.setSearchText}
                 types={this.state.productTypes}

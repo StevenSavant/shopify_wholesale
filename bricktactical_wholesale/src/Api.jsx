@@ -9,7 +9,7 @@ const config_url = buildConfigs.hostS3BucketUrl + '/' + buildConfigs.S3ConfigFil
 
 export function get_products(responseHandler) {
 
-    if (environment === 'local-dev') {
+    if (environment !== 'prod') {
         console.log("env: local-dev, using localData")
         responseHandler(localData)
         return null
