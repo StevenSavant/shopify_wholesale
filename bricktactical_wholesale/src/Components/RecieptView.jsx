@@ -5,6 +5,10 @@ import { Component } from 'react';
 import { InvoiceLogoFigure } from './LogoFigure'
 import { Container, Row, Col, Form, FormControl } from 'react-bootstrap';
 
+function formatName(fullName) {
+    return fullName.replaceAll(' ', '_')
+}
+
 function getDate(format) {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -108,7 +112,7 @@ class RecieptView extends Component {
             <Form className="RequestorForm">
                 <Row id='CustomerInfo'>
                     <Col>
-                        <Form.Label>Full Name</Form.Label>
+                        <Form.Label>Company Name</Form.Label>
                         <Form.Control type="text" placeholder="ex: John Norman" onChange={this.handleName} />
                     </Col>
                     <Col>
@@ -165,7 +169,7 @@ class RecieptView extends Component {
                 </Button>
                 <ReactToPrint
                     content={() => this.componentRef}
-                    documentTitle={`BrickTactical_Invoice_${getDate('file')}`}
+                    documentTitle={`${formatName(this.state.fullName)}_BrickTactical_Invoice_${getDate('file')}`}
                     removeAfterPrint
                     trigger={() => {
                         return (
